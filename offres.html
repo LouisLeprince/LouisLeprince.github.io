@@ -1,0 +1,177 @@
+<html>
+	<?php
+						try
+						{
+							// On se connecte à MySQL
+							$bdd = new PDO('mysql:host=localhost;dbname=formulaire;charset=utf8', 'root', 'root');
+						}
+						catch(Exception $e)
+						{
+							// En cas d'erreur, on affiche un message et on arrête tout
+						        die('Erreur : '.$e->getMessage());
+						}
+		 include("fonctions.php");	
+	?>
+	
+	<head> 
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<title> STID Descartes - Formulaire d'offre </title>
+	    <link rel="stylesheet" href="css/StyleOffres.css" /> 
+	</head>
+	<body>
+		<header class="Header">
+			<div class="Header-fond"></div>
+			<div class="NavBar">
+				
+				<?php include("includes/navbar_contact.php"); ?>
+				<?php include("includes/navbar_retour_acceuil.php"); ?>
+
+			</div>
+		</header>
+
+		<div class = "Contenu">
+			<div class = "contenu-fond-haut"></div>
+			<div class = "contenu-fond-bas"></div>
+			<div class = "contenu-fond-id-entreprise">
+				<img src = "/image/humanis.png" width = 125px height = 90px>
+
+				<?php
+					$id = $_GET['id'];
+					$reponse = $bdd->query('SELECT * FROM info_general as a 
+						LEFT JOIN contact as b ON a.id_offre = b.id_offre 
+						WHERE a.id_offre = '.$id.'');
+					while ($donnees = $reponse->fetch())
+					{
+				?>
+					<h4 align ="justify"> Nom : <?php echo $donnees['nom']; ?> </br> 
+										  Adresse : <?php echo $donnees['adresse']; ?> </br> 
+										  Tel : <?php echo $donnees['tel']; ?> </br> 
+										  Web : <?php echo $donnees['web']; ?></br> 
+										  <?php echo $donnees['mail']; ?> </h4>
+
+				<?php
+					}
+					$reponse->closeCursor();
+				?>
+
+			</div>
+			</a name = "haut-page">
+				<div class = "contenu-ecriture">
+					<?php
+						$id = $_GET['id'];
+						$reponse = $bdd->query('SELECT * FROM info_general WHERE id_offre = '.$id.'');
+						while ($donnees = $reponse->fetch())
+						{
+
+					?>
+
+					<div class = "poste-titre">
+							<h1 align="center"> OFFRE D'EMPLOI DE : <?php echo strtoupper($donnees['nom'])?> </h1>
+							<?php
+								}
+								$reponse->closeCursor();
+							?>
+					</div>
+
+					<div class = "contenu-fichier">
+					    <div class = "contenu-fichier-titre">
+							<h1 align = "center"> INFORMATION GENERALE </h1>
+					    </div>
+					    <div class = "contenu-fichier-resume">
+					    	<?php
+					    		$id = $_GET['id'];
+							    $reponse = $bdd->query('SELECT * FROM info_general WHERE id_offre = '.$id.'');
+								while ($donnees = $reponse->fetch())
+								{
+							?>
+					    	<h2 align ="left"> L'entreprise </h2>
+							<h4 align ="justify"> Nom : <?php echo $donnees['nom']; ?> </br> Domaine : <?php echo lib_domaine($donnees['domaine']); ?> </br> 
+								Taille : <?php echo lib_taille($donnees['taille']); ?> </br> 
+								Secteur d'activité : <?php echo lib_secteur($donnees['secteur']); ?> </br> </h4>
+							<?php
+								}
+								$reponse->closeCursor();
+							?>
+
+
+							<?php
+					    		$id = $_GET['id'];
+							    $reponse = $bdd->query('SELECT * FROM contact WHERE id_offre = '.$id.'');
+								while ($donnees = $reponse->fetch())
+								{
+							?>
+							<h2 align ="left"> Ses coordonnées </h2>
+							<h4 align ="justify"> Mail : <?php echo $donnees['mail']; ?> </br> Telephone : <?php echo $donnees['tel']; ?></br>  
+								Adresse : <?php echo $donnees['adresse']; ?> </br> Site internet : <?php echo $donnees['web']; ?> </br>
+								Autre moyen de contact : <?php echo $donnees['autre']; ?> </h4>
+							<?php
+								}
+								$reponse->closeCursor();
+							?>
+
+
+							<?php
+					    		$id = $_GET['id'];
+							    $reponse = $bdd->query('SELECT * FROM contrat WHERE id_offre = '.$id.'');
+								while ($donnees = $reponse->fetch())
+								{
+							?>
+							<h2 align ="left"> L'offre d'emploi </h2>
+							<h4 align ="justify"> Adresse : <?php echo $donnees['adresse']; ?> </br> Code Postal : <?php echo $donnees['cp']; ?> </br>  
+								Contrat : <?php echo $donnees['type']; ?> <?php echo $donnees['duree']; ?></br> 
+								Secteur de métier : <?php echo $donnees['ppn']; ?></h4>
+							<?php
+								}
+								$reponse->closeCursor();
+							?>
+					    </div>
+					</div>
+
+					<div class = "contenu-actu">
+					    <div class = "contenu-actu-titre">
+							<h1 align ="center"> INFORMATION POSTE </h1>
+					    </div>
+					    <div class = "contenu-actu-resume">
+					    	<?php
+					    		$id = $_GET['id'];
+							    $reponse = $bdd->query('SELECT * FROM poste WHERE id_offre = '.$id.'');
+								while ($donnees = $reponse->fetch())
+								{
+							?>
+					    	<h2 align ="left"> Détail des compétences </h2>
+							<h4 align ="justify"> Expérience : <?php echo $donnees['experience']; ?> </br> Salaire : <?php echo $donnees['salaire']; ?> </br> 
+							 Niveau d'étude : <?php echo $donnees['etude']; ?> </br> Logiciels : <?php echo $donnees['informatique']; ?> </h4>
+							<h4 align ="center"> Langues </h4>
+							<h4 align ="justify"> Anglais : <?php echo $donnees['anglais']; ?> </br> Allemand : <?php echo $donnees['allemand']; ?>
+							</br> Espagnol : <?php echo $donnees['espagnol']; ?></h4>
+							<?php
+								}
+								$reponse->closeCursor();
+							?>
+
+							<?php
+					    		$id = $_GET['id'];
+							    $reponse = $bdd->query('SELECT * FROM info WHERE id_offre = '.$id.'');
+								while ($donnees = $reponse->fetch())
+								{
+							?>
+							<h2 align ="left"> Compléments </h2>
+							<h4 align ="justify"> Accès handicapé : <?php echo $donnees['handicape']; ?> </br> Pour les STID : <?php echo $donnees['stid']; ?> </h4>
+							<h2> Description du poste et des missions</h2>
+							<h4 align ="justify"> <?php echo $donnees['supplementaire']; ?> </h4>
+							<?php
+								}
+								$reponse->closeCursor();
+							?>
+					    </div>
+					</div>
+
+				</div>
+
+				<?php include("includes/pied_FAQ.php"); ?>
+
+			</a>
+		</div>
+	</body>
+</html>
