@@ -1,0 +1,48 @@
+body {
+  width : 100%;
+  height: 100%;
+  margin : 0 auto;
+  padding : 0 auto;
+}
+
+h1{
+  font-size: 100px;
+  font-family: Century Gothic;
+}
+
+h4{
+  font-size: 10px;
+  font-family: Century Gothic;
+  color: white;
+}
+
+a {
+  color: #0A130A;
+  margin: 0;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+  text-decoration: none; 
+}
+a:hover { 
+  color: #f26525 
+}
+
+#body-center {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #EFFFEF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
