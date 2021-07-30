@@ -3,37 +3,43 @@ body {
   height: 100%;
   margin : 0 auto;
   padding : 0 auto;
+  background-color: #EFFFEF;
 }
 
 h1{
   font-size: 100px;
   font-family: Century Gothic;
+  padding-right: 20px;
+  border-right : 4px solid #0A130A ;
 }
 
-h4{
-  font-size: 10px;
+h2{
+  font-size: 100px;
   font-family: Century Gothic;
-  color: white;
+  padding-left: 20px;
+  border-left : 4px solid #0A130A ;
 }
+
 
 a {
   color: #0A130A;
-  margin: 0;
-  padding-top: 5%;
-  padding-bottom: 5%;
-  padding-left: 10%;
-  padding-right: 10%;
-  text-decoration: none; 
+  text-decoration: none;
 }
 a:hover { 
   color: #f26525 
+}
+
+.box_empty {
+  position: relative;
+  width: 100%;
+  height: 25%;
+  margin: 0;
 }
 
 #body-center {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: #EFFFEF;
 
   display: flex;
   flex-direction: column;
@@ -41,7 +47,28 @@ a:hover {
   align-items: center;
 }
 
+#body-left-side {
+  position: fixed;
+  width: 50%;
+  height: 100%;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#body-right-side {
+  position: relative;
+  margin-left:50%;
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
 
 
 
